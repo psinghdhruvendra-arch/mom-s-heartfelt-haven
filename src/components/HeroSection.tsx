@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Volume2, VolumeX } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const FloatingCard = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
