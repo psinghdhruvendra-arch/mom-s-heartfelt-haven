@@ -12,8 +12,33 @@ const FloatingCard = ({ className, delay = 0 }: { className?: string; delay?: nu
 );
 
 const HeroSection = () => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+
   const scrollToNext = () => {
     document.getElementById("why-special")?.scrollIntoView({ behavior: "smooth" });
+
+    // Start music on first click
+    if (!audioRef.current) {
+      const audio = new Audio("/bg-music.mp3");
+      audio.loop = true;
+      audio.volume = 0.3;
+      audioRef.current = audio;
+    }
+    if (!musicPlaying) {
+      audioRef.current.play();
+      setMusicPlaying(true);
+    }
+  };
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+    if (musicPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setMusicPlaying(!musicPlaying);
   };
 
   return (
