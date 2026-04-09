@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Volume2, VolumeX } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const FloatingCard = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
@@ -10,12 +12,55 @@ const FloatingCard = ({ className, delay = 0 }: { className?: string; delay?: nu
 );
 
 const HeroSection = () => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+
   const scrollToNext = () => {
     document.getElementById("why-special")?.scrollIntoView({ behavior: "smooth" });
+
+    // Start music on first click
+    if (!audioRef.current) {
+      const audio = new Audio("/bg-music.mp3");
+      audio.loop = true;
+      audio.volume = 0.3;
+      audioRef.current = audio;
+    }
+    if (!musicPlaying) {
+      audioRef.current.play();
+      setMusicPlaying(true);
+    }
+  };
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+    if (musicPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setMusicPlaying(!musicPlaying);
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Music toggle */}
+      <AnimatePresence>
+        {musicPlaying !== null && audioRef.current && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            onClick={toggleMusic}
+            className="fixed top-6 right-6 z-50 glass-strong rounded-full p-3 cursor-pointer hover:scale-110 transition-transform"
+            aria-label={musicPlaying ? "Mute music" : "Play music"}
+          >
+            {musicPlaying ? (
+              <Volume2 className="w-5 h-5 text-foreground" />
+            ) : (
+              <VolumeX className="w-5 h-5 text-foreground" />
+            )}
+          </motion.button>
+        )}
+      </AnimatePresence>
       {/* Background */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" width={1920} height={1080} />
