@@ -64,9 +64,8 @@ const WhySpecialSection = () => {
             <p
               className="text-lg md:text-2xl text-foreground leading-relaxed text-center"
               style={{
-                fontFamily: "'Playfair Display', serif",
-                fontStyle: "italic",
-                letterSpacing: "0.01em",
+                fontFamily: "'Shadows Into Light', cursive",
+                letterSpacing: "0.02em",
                 lineHeight: "1.9",
               }}
             >
