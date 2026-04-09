@@ -43,6 +43,24 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Music toggle */}
+      <AnimatePresence>
+        {musicPlaying !== null && audioRef.current && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            onClick={toggleMusic}
+            className="fixed top-6 right-6 z-50 glass-strong rounded-full p-3 cursor-pointer hover:scale-110 transition-transform"
+            aria-label={musicPlaying ? "Mute music" : "Play music"}
+          >
+            {musicPlaying ? (
+              <Volume2 className="w-5 h-5 text-foreground" />
+            ) : (
+              <VolumeX className="w-5 h-5 text-foreground" />
+            )}
+          </motion.button>
+        )}
+      </AnimatePresence>
       {/* Background */}
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" width={1920} height={1080} />
