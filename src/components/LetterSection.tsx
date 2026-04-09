@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { FloatingImagesLayer2 } from "./FloatingImages";
 
 const LetterSection = () => {
   return (
     <section className="relative py-24 md:py-32 px-6 gradient-bg overflow-hidden">
+      <FloatingImagesLayer2 />
       <div className="max-w-3xl mx-auto relative">
         {/* Layered glass panels behind */}
         <div className="absolute inset-0 glass rounded-3xl translate-x-4 translate-y-4 opacity-30" />

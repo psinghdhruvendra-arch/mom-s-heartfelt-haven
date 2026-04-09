@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
+import { FloatingImagesLayer3 } from "./FloatingImages";
 
 const SurpriseSection = () => {
   const [revealed, setRevealed] = useState(false);
@@ -25,6 +26,7 @@ const SurpriseSection = () => {
 
   return (
     <section className="relative py-24 md:py-32 px-6 gradient-bg overflow-hidden">
+      <FloatingImagesLayer3 />
       <div className="max-w-2xl mx-auto text-center relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
